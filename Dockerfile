@@ -5,7 +5,14 @@ MAINTAINER Mark Ericksen @brainlid
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT 2016-07-26
+ENV REFRESHED_AT 2016-07-27
+
+#
+# For Phoenix builds, installing NODE/NPM is required for building assets
+# through brunch.
+#
+# This adds NODE allowing locking to a specific node version.
+#
 
 # Setup NPM - from https://github.com/nodejs/docker-node/blob/5d433ece4d221fac7e38efbec25ffea2dea56286/5.2/Dockerfile
 # gpg keys listed at https://github.com/nodejs/node
@@ -31,6 +38,5 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
 
-RUN npm install -g brunch
 
 # ...put your own build instructions here...
